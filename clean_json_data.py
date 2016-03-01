@@ -24,7 +24,6 @@ toKeep = {
 	'in_reply_to_status_id_str': 1, 
 	'favorite_count': 1, 
 	'source': 1, 
-	'retweeted': 1,
 	'coordinates': 1, 
 	'entities': {
 		'hashtags': {
@@ -57,7 +56,10 @@ toKeep = {
 	'possibly_sensitive': 1,
 	'created_at': 1,
 	'place': 1,
-	}
+	'retweeted_status': {
+		"id_str": 1,
+	},
+}
 
 #Takes about 1.8 Seconds per 10000 json objects. 
 start = time.time()
@@ -70,41 +72,52 @@ with open("cleanedShootingTweets.json", "a") as cleanedTweets:
 		    	jsonline = json.loads(line)
 		    	newJson = {}
 		    	for key in toKeep.keys():
-		    		jsonVal = jsonline.get(key,None)
 		    		#This is not a nested hash
 		    		if (toKeep[key] == 1):
+		    			jsonVal = jsonline.get(key,None)
 		    			newJson[key] = jsonVal
 		    		#This is a nested hash
 		    		else :
+		    			jsonVal = jsonline.get(key,{})
 		    			for key2 in toKeep[key].keys():
-		    				subJson = jsonVal.get(key2, {})
 		    				if (toKeep[key][key2] == 1):
+		    					subJson = jsonVal.get(key2, None)
 		    					newKey = key + '_' + key2
 				    			newJson[newKey] = subJson
 				    		#handle user mentions separately because that's a list
 				    		elif (key2 in ['user_mentions', 'hashtags']):
-				    			for j, jsonElem in enumerate(subJson):
+				    			subJson = jsonVal.get(key2, {})
+				    			for key3 in toKeep[key][key2].keys():
+									newKey = key + '_' + key2 + '_' + key3
+									newJson[newKey] = []
+									for j, jsonElem in enumerate(subJson):
+
 				    				# print(jsonElem)
-				    				for key3 in toKeep[key][key2]:
-			    						newKey = key + '_' + key2 + '_' + str(j) + '_' + key3
-				    					subsubJson = jsonElem.get(key,{})
-						    			newJson[newKey] = subsubJson.get(key3,None)
+										newJson[newKey].append(jsonElem.get(key3,None))
+						    			# print(newKey, newJson[newKey])
 
 				    		#This is a twice-nested hash (we currently don't have 
 				    		#this case, but it's here for completeness/in case we 
 				    		#decide to add something)
 				    		else :
+				    			subJson = jsonVal.get(key2, {})
 				    			for key3 in toKeep[key][key2].keys():
 				    				newKey = key + '_' + key2 + '_' + key3
 			    					subsubJson = subJson.get(key,None)
 					    			newJson[newKey] = subsubJson.get(key3,None)
 		    	# jsonKeeping = {key: jsonline.get(key,None) for key in toKeep}
 		    	
+
+		   #  	print newJson
+		   #  	if (i > 5):
+					# break	
 		    	#Add a new line so we aren't just appending to the file. 
 		    	cleanedTweets.write(json.dumps(newJson) + "\n")
+
+					    
 		        if (i % 100000 == 0):
 		        	print "number of tweets parsed: ", i
-		        	print "total time elapsed: ",  time.time() - start
+		        	print "total time elapsed: ", time.time() - start
 		print "finished file: ", tweetFile	
 
 
