@@ -22,5 +22,5 @@ Thus far, we have:
 * We have also started to plan out our final visualization(s).
 	* Our minumum viable product product will be a map-based, temporal visualization of the number of tweets mentioning Ferguson over time. We are planning on producing similar visualizations for both the tweets related to the shooting and the tweets shortly after the (lack of) indictment. 
 	* Additionally, a stretch goal would be a visualization depicting how the most re-tweeted tweets spread over time, or how a tweet goes viral over time.
-	* Another thing that we are interested in investigating if the time allows is when celebrities and/or public organizations (verified twitter accounts) get involved -- how do celebrities/public figures play a role in the conversation about Ferguson over social media. git
+	* Another thing that we are interested in investigating if the time allows is when celebrities and/or public organizations (verified twitter accounts) get involved -- how do celebrities/public figures play a role in the conversation about Ferguson over social media.
 
