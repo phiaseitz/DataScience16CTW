@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np 
 import pandas as pd
 import cartopy.crs as ccrs
+from ipywidgets import widgets
 
 data = []
 filename='./data/cleanedShootingTweets.json'
@@ -76,8 +77,14 @@ ax = plt.axes(projection=ccrs.PlateCarree())
 # shapename = 'admin_1_states_provinces_lakes_shp'
 # states_shp = shpreader.natural_earth(resolution='110m',category='cultural', name=shapename)
 ax.coastlines()
-plt.scatter(df['x'],df['y'],color='r')
-plt.scatter(df['x_p'],df['y_p'],color='g')
+
+def plotLocation(Hour):
+	plt.scatter(df.x[df['Hour']==Hour],df.y[df['Hour']==Hour],color='r')
+	plt.scatter(df.x_p[df['Hour']==Hour],df.y_p[df['Hour']==Hour],color='g')
+
+Hour = widgets.IntSlider(min=0, max=23, value=10)
+widgets.interact(plotLocation,Hour=Hour)
+
 plt.show()
 
 
