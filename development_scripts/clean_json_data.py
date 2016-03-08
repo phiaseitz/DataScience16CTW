@@ -1,15 +1,19 @@
 import json
 import time
+import os
 
 data = []
-baseFolderPath = './data/shooting_tweets/raw tweet data/'
+baseFolderPath = './../data/shooting_tweets/raw tweet data/'
 files = ['tweets.json', 'rest_tweets.json', 
 	'rest_tweets2.json', 'rest_tweets3.json', 
 	'rest_tweets4.json', 'rest_tweets5.json',
 	'rest_tweets6.json', 'rest_tweets7.json',
 	'rest_tweets8.json', 'rest_tweets9.json',
 	'rest_tweets10.json', 'rest_tweets11.json',
-	'rest_tweets12.json']
+	'rest_tweets12.json', 'rest_tweets13.json',
+	'rest_tweets14.json', 'rest_tweets15.json',
+	'rest_tweets16.json', 'rest_tweets17.json',
+	'rest_tweets18.json',]
 i = 0
 
 
@@ -63,9 +67,9 @@ toKeep = {
 
 #Takes about 1.8 Seconds per 10000 json objects. 
 start = time.time()
-with open("cleanedShootingTweets.json", "a") as cleanedTweets:
+with open("./../cleanedShootingTweets.json", "a") as cleanedTweets:
 	for tweetFile in files:
-		filepath = baseFolderPath + tweetFile
+		filepath = os.path.abspath(baseFolderPath + tweetFile)
 		with open(filepath) as f:
 		    for line in f:
 		    	i += 1
