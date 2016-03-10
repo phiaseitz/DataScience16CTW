@@ -15,4 +15,7 @@ Initially, we will explore the dataset, familiarizing ourselves with the data ob
 ## Assessing this Project
 We wish to be assessed in the ease of use (given interactive visualizations) of our project, in addition to the clarity of the story (is there a coherent story or message being presented), clarity of data presentation (are all figures legible, accessible, and appropriately labeled), and documentation/style of our code. In particular, our learning goals for this project tend towards exploring how to make good visualizations/figures of merit, and so wish to be assessed more critically on these. Our standard is: would someone who is non-technical be able to use our product effectively and understand the story; for someone who is technical, would they be able to re-create our work from our documentation.
 
+### Updated Assessment Plan (3/10)
+Over the course of this project, we have slightly shifted our goal from creating a set of visualizations that tell a story about the events in Ferguson to an investigation of what kinds of visualizations are helpful in telling these stories. As a result, we would like to be evaluated in terms of how well we analyze the merits of the types of visualizations that we have created, rathter than how *good* our visualizations are at telling stories. 
+
 
